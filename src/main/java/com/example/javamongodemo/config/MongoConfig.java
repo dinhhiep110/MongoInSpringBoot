@@ -3,15 +3,16 @@ package com.example.javamongodemo.config;
 import com.mongodb.ConnectionString;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class MongoConfig {
 
-    private static final String CONNECTION_STRING = "mongodb://localhost:27017";
-
-    private final ConnectionString connectionString = new ConnectionString(CONNECTION_STRING);
+    @Value("${spring.data.mongodb.uri}")
+    private String CONNECTION_STRING;
 
     @Bean
     public MongoClient mongoClientDriverConnection() {
@@ -25,7 +26,7 @@ public class MongoConfig {
                     .codecRegistry(codecRegistry)
                     .build();
     */
-
+        ConnectionString connectionString = new ConnectionString(CONNECTION_STRING);
         return MongoClients.create(connectionString);
     }
 }
