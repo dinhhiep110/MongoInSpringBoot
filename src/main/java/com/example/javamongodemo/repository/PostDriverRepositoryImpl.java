@@ -73,13 +73,13 @@ public class PostDriverRepositoryImpl extends BaseRepositoryImpl<Post> {
         projectionFields.append("language", 1);
         projectionFields.append("age", 1);
 
-        findOne(queryThree, projectionFields, "_id");
+        findOneDocument(queryThree, projectionFields, "_id");
     }
 
     public void updateOnePost() {
         Document query = new Document().append("title", "Hehe");
         Document update = new Document();
         update.append("$set", new Document("age", 19));
-        updateOne(query, update, new UpdateOptions().upsert(false));
+        updateOneDocument(query, update, new UpdateOptions().upsert(false));
     }
 }

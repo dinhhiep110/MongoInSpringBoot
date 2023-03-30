@@ -10,17 +10,17 @@ public interface BaseRepository {
 
     void findAllQuery();
 
-    void insertOne(Document document);
+    void insertOneDocument(Document document);
 
-    void insertMany(List<Document> documents);
+    void insertManyDocument(List<Document> documents);
 
     MongoCursor<Document> findWithQuery(Document document, Document projectionField, String sortField);
 
     void deleteCollection();
 
-    void updateOne(Document query, Document update, UpdateOptions updateOptions);
+    void updateOneDocument(Document query, Document update, UpdateOptions updateOptions);
 
-    Document findOne(Document query,Document projection,String sortField);
+    Document findOneDocument(Document query,Document projection,String sortField);
 
     void unsetField(Document query,String fieldName);
 }

@@ -44,19 +44,19 @@ public abstract class BaseRepositoryImpl<T> implements BaseRepository{
     }
 
     @Override
-    public void insertOne(Document document) {
+    public void insertOneDocument(Document document) {
         getMongoCollection().insertOne(document);
     }
 
     @Override
-    public void insertMany(List<Document> documents) {
+    public void insertManyDocument(List<Document> documents) {
         getMongoCollection().insertMany(documents);
     }
 
     @Override
     public void unsetField(Document query,String fieldName) {
         Document update = new Document("$unset", new Document(fieldName,""));
-        updateOne(query,update,new UpdateOptions().upsert(false));
+        updateOneDocument(query,update,new UpdateOptions().upsert(false));
     }
 
     @Override
@@ -77,7 +77,7 @@ public abstract class BaseRepositoryImpl<T> implements BaseRepository{
     }
 
     @Override
-    public void updateOne(Document query, Document update, UpdateOptions updateOptions) {
+    public void updateOneDocument(Document query, Document update, UpdateOptions updateOptions) {
         UpdateResult result = getMongoCollection().updateOne(query, update, updateOptions);
         System.out.println("Modified document count: " + result.getModifiedCount());
     }
@@ -97,7 +97,7 @@ public abstract class BaseRepositoryImpl<T> implements BaseRepository{
     }
 
     @Override
-    public Document findOne(Document query,Document projectionField,String sortField) {
+    public Document findOneDocument(Document query,Document projectionField,String sortField) {
         FindIterable<Document> result = getMongoCollection().find(query);
         if(Objects.nonNull(projectionField)){
             result.projection(projectionField);

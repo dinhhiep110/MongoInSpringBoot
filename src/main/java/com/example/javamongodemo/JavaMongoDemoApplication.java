@@ -10,13 +10,12 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 import java.util.List;
 
-@SpringBootApplication()
 @EnableMongoRepositories
+@SpringBootApplication
 public class JavaMongoDemoApplication implements CommandLineRunner {
 
     @Autowired
@@ -85,19 +84,20 @@ public class JavaMongoDemoApplication implements CommandLineRunner {
 //
 //        mongoTemplate.save(post);
 
-        System.out.println(postRepository.findByAdultAuthor());
+//        System.out.println(postRepository.findByAdultAuthor());
 
-        Query deleteQuery = new Query(Criteria.where("title").is("Dump"));
-        mongoTemplate.remove(deleteQuery,Post.class);
+//        Query deleteQuery = new Query(Criteria.where("title").is("Dump"));
+//        mongoTemplate.remove(deleteQuery,Post.class);
 
-        Query updateQuery = new Query(Criteria.where("title").is("Hehe").orOperator(Criteria.where("age").is(20)));
-        Update update = new Update();
-        update.set("age",18);
-        mongoTemplate.updateFirst(updateQuery,update,Post.class);
+//        Query updateQuery = new Query(Criteria.where("title").is("Hehe").orOperator(Criteria.where("age").is(20)));
+//        Update update = new Update();
+//        update.set("age",18);
+//        mongoTemplate.updateFirst(updateQuery,update,Post.class);
 
 //        printList(postRepository.findPostByTitleIn("Hehe","Dump"));
 
 //        printList(postRepository.findPostByAgeGreaterThan(19));
+        System.out.println("count: " + postRepository.countByAge(18));
 
         printList(postRepository.findAll());
     }
